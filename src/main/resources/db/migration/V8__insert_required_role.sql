@@ -1,5 +1,2 @@
-INSERT INTO public."role"("name")
-VALUES('CONSUMER');
-
-INSERT INTO public."role"("name")
-VALUES('ADMIN');
+INSERT INTO public."role"("id","name")
+VALUES(1,'CONSUMER'), (2,'ADMIN'), (3,'COMPANY');

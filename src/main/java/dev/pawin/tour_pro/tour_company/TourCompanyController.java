@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.pawin.tour_pro.tour_company.dto.RegisterTourCompanyDto;
 import dev.pawin.tour_pro.tour_company.model.TourCompany;
-import dev.pawin.tour_pro.tour_company.model.TourCompanyDto;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -28,7 +28,7 @@ public class TourCompanyController {
     }
 
     @PostMapping
-    public ResponseEntity<TourCompany> registerTourCompany (@RequestBody @Validated TourCompanyDto body) {
+    public ResponseEntity<TourCompany> registerTourCompany (@RequestBody @Validated RegisterTourCompanyDto body) {
         var result = tourCompanyService.registerTourCompany(body);
 
         return ResponseEntity.ok(result);

@@ -1,4 +1,4 @@
-package dev.pawin.tour_pro.tour_company;
+package dev.pawin.tour_pro.tour_company.repository;
 
 import org.springframework.data.repository.CrudRepository;
 

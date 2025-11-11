@@ -1,4 +1,4 @@
-package dev.pawin.tour_pro.tour_company.model;
+package dev.pawin.tour_pro.common.enumeration;
 
 public enum TourCompanyStatus {
     WAITING,
