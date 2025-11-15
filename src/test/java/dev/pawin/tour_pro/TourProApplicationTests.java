@@ -1,10 +1,9 @@
 package dev.pawin.tour_pro;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import dev.pawin.tour_pro.config.AbstractIntegrationTest;
 
-@SpringBootTest
-class TourProApplicationTests {
+class TourProApplicationTests extends AbstractIntegrationTest {
 
 	@Test
 	void contextLoads() {
