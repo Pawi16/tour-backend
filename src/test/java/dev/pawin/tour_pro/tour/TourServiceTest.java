@@ -89,18 +89,19 @@ public class TourServiceTest {
 
     @Test
     void whenGetTourByIdThenSuccess() {
-        
-        //arrange
+
+        // arrange
         var mockTourCompany = new TourCompany(
                 1,
                 "WinTour",
                 TourCompanyStatus.WAITING.name());
-        var mockTour = new Tour(1, AggregateReference.to(mockTourCompany.id()), "PhuketTour", "lazy trip", "Phuket", 0, Instant.parse("2025-01-15T14:30:00Z"), TourStatus.PENDING.name());
+        var mockTour = new Tour(1, AggregateReference.to(mockTourCompany.id()), "PhuketTour", "lazy trip", "Phuket", 0,
+                Instant.parse("2025-01-15T14:30:00Z"), TourStatus.PENDING.name());
         when(tourRepository.findById(anyInt())).thenReturn(Optional.of(mockTour));
         // act
         var actual = tourService.getTourById(1);
 
-        //assert
+        // assert
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(mockTour.id(), actual.id());
         Assertions.assertEquals(mockTour.title(), actual.title());
@@ -109,7 +110,7 @@ public class TourServiceTest {
         Assertions.assertEquals(mockTour.activityDate(), actual.activityDate());
         Assertions.assertEquals(mockTour.status(), actual.status());
         Assertions.assertEquals(mockTour.tourCompanyId().getId(), actual.tourCompanyId().getId());
-        
+
     }
 
     @Test
@@ -128,7 +129,8 @@ public class TourServiceTest {
     void whenGetPageTourThenSuccess() {
         // arrange
         Pageable pageable = PageRequest.of(0, 10);
-        var mockTour = new Tour(1, AggregateReference.to(1), "PhuketTour", "lazy trip", "Phuket", 0, Instant.parse("2025-01-15T14:30:00Z"), TourStatus.PENDING.name());
+        var mockTour = new Tour(1, AggregateReference.to(1), "PhuketTour", "lazy trip", "Phuket", 0,
+                Instant.parse("2025-01-15T14:30:00Z"), TourStatus.PENDING.name());
         List<Tour> tours = List.of(mockTour);
         Page<Tour> pagedTours = new PageImpl<>(tours, pageable, tours.size());
 
