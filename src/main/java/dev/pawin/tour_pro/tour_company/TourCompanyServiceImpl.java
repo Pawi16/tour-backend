@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import dev.pawin.tour_pro.common.enumeration.TourCompanyStatus;
-import dev.pawin.tour_pro.common.exception.EntityNotFound;
+import dev.pawin.tour_pro.common.exception.EntityNotFoundException;
 import dev.pawin.tour_pro.tour_company.dto.RegisterTourCompanyDto;
 import dev.pawin.tour_pro.tour_company.model.TourCompany;
 import dev.pawin.tour_pro.tour_company.model.TourCompanyLogin;
-import dev.pawin.tour_pro.tour_company.model.TourCompanyWallet;
 import dev.pawin.tour_pro.tour_company.repository.TourCompanyLoginRepository;
 import dev.pawin.tour_pro.tour_company.repository.TourCompanyRepository;
-import dev.pawin.tour_pro.tour_company.repository.TourCompanyWalletRepository;
+import dev.pawin.tour_pro.wallet.model.TourCompanyWallet;
+import dev.pawin.tour_pro.wallet.repository.TourCompanyWalletRepository;
 
 @Service
 public class TourCompanyServiceImpl implements TourCompanyService {
@@ -59,7 +59,7 @@ public class TourCompanyServiceImpl implements TourCompanyService {
     @Transactional
     public TourCompany approveTourCompany(Integer id) {
         TourCompany tourCompany = tourCompanyRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFound(String.format("Tour Company Id: %s not found", id)));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Tour Company Id: %s not found", id)));
         var approvedTourCompany = new TourCompany(id, tourCompany.name(), TourCompanyStatus.APPROVED.name());
         var updatedTourCompany = tourCompanyRepository.save(approvedTourCompany);
         

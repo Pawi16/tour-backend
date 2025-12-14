@@ -22,7 +22,7 @@ import org.springframework.data.jdbc.core.mapping.AggregateReference;
 
 import dev.pawin.tour_pro.common.enumeration.TourCompanyStatus;
 import dev.pawin.tour_pro.common.enumeration.TourStatus;
-import dev.pawin.tour_pro.common.exception.EntityNotFound;
+import dev.pawin.tour_pro.common.exception.EntityNotFoundException;
 import dev.pawin.tour_pro.tour.dto.CreateTourDto;
 import dev.pawin.tour_pro.tour.model.Tour;
 import dev.pawin.tour_pro.tour.model.TourCount;
@@ -75,13 +75,13 @@ public class TourServiceTest {
 
     @Test
     void whenCreateTourButTourCompanyNotFoundThenError() {
-        when(tourCompanyRepository.findById(anyInt())).thenThrow(new EntityNotFound());
+        when(tourCompanyRepository.findById(anyInt())).thenThrow(new EntityNotFoundException());
         var payload = new CreateTourDto(1, "PhuketTour", "lazy trip", "Phuket", null,
                 Instant.parse("2025-01-15T14:30:00Z"), null);
 
         // act and assert
         Assertions.assertThrows(
-                EntityNotFound.class, () -> {
+                EntityNotFoundException.class, () -> {
                     tourService.createTour(payload);
 
                 });
@@ -119,7 +119,7 @@ public class TourServiceTest {
         when(tourRepository.findById(anyInt())).thenReturn(Optional.empty());
 
         // act & assert
-        Assertions.assertThrows(EntityNotFound.class, () -> {
+        Assertions.assertThrows(EntityNotFoundException.class, () -> {
             tourService.getTourById(999);
         });
 

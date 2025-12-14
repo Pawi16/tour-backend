@@ -13,6 +13,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import dev.pawin.tour_pro.common.enumeration.RoleEnum;
+import dev.pawin.tour_pro.user.model.Role;
+import dev.pawin.tour_pro.user.repository.RoleRepository;
+import dev.pawin.tour_pro.user.service.RoleService;
 
 @ExtendWith(MockitoExtension.class)
 public class RoleServiceTest {

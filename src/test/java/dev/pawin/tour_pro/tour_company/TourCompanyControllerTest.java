@@ -21,7 +21,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dev.pawin.tour_pro.common.enumeration.TourCompanyStatus;
-import dev.pawin.tour_pro.common.exception.EntityNotFound;
+import dev.pawin.tour_pro.common.exception.EntityNotFoundException;
 import dev.pawin.tour_pro.tour_company.dto.RegisterTourCompanyDto;
 import dev.pawin.tour_pro.tour_company.model.TourCompany;
 
@@ -82,7 +82,7 @@ public class TourCompanyControllerTest {
     @Test
     void whenApproveTourCompanyButEntityNotFoundThenError() throws Exception {
         // arrange
-        when(tourCompanyService.approveTourCompany(anyInt())).thenThrow(new EntityNotFound());
+        when(tourCompanyService.approveTourCompany(anyInt())).thenThrow(new EntityNotFoundException());
 
         mockMvc.perform(MockMvcRequestBuilders.patch(String.format("/api/v1/tour-companies/%d/approve", 1)))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());

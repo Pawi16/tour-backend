@@ -31,7 +31,7 @@ import com.github.dockerjava.api.exception.InternalServerErrorException;
 
 import dev.pawin.tour_pro.common.enumeration.TourCompanyStatus;
 import dev.pawin.tour_pro.common.enumeration.TourStatus;
-import dev.pawin.tour_pro.common.exception.EntityNotFound;
+import dev.pawin.tour_pro.common.exception.EntityNotFoundException;
 import dev.pawin.tour_pro.tour.dto.CreateTourDto;
 import dev.pawin.tour_pro.tour.model.Tour;
 import dev.pawin.tour_pro.tour_company.dto.RegisterTourCompanyDto;
@@ -81,7 +81,7 @@ public class TourControllerTest {
         // arrange
         int nonExistentId = 999;
         when(tourService.getTourById(nonExistentId))
-                .thenThrow(new EntityNotFound(String.format("Tour Id: %s not found", nonExistentId)));
+                .thenThrow(new EntityNotFoundException(String.format("Tour Id: %s not found", nonExistentId)));
 
         // act & assert
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/tours/{id}", nonExistentId))

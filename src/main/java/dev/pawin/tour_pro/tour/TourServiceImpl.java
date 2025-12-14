@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import dev.pawin.tour_pro.common.enumeration.TourStatus;
-import dev.pawin.tour_pro.common.exception.EntityNotFound;
+import dev.pawin.tour_pro.common.exception.EntityNotFoundException;
 import dev.pawin.tour_pro.tour.dto.CreateTourDto;
 import dev.pawin.tour_pro.tour.model.Tour;
 import dev.pawin.tour_pro.tour.model.TourCount;
@@ -38,7 +38,7 @@ public class TourServiceImpl implements TourService {
     public Tour createTour(CreateTourDto payload) {
         var tourCompanyId = payload.tourCompanyId();
         var tourCompany = tourCompanyRepository.findById(tourCompanyId)
-                .orElseThrow(() -> new EntityNotFound(String.format("Tour Company Id: %s not found", tourCompanyId)));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Tour Company Id: %s not found", tourCompanyId)));
         AggregateReference<TourCompany, Integer> tourCompanyReference = AggregateReference.to(tourCompany.id());
         var tour = new Tour(
                 null,
@@ -57,7 +57,7 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public Tour getTourById(int id) {
-        return tourRepository.findById(id).orElseThrow(() -> new EntityNotFound(String.format("Tour Id: %s not found", id)));
+        return tourRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("Tour Id: %s not found", id)));
     }
 
     @Override

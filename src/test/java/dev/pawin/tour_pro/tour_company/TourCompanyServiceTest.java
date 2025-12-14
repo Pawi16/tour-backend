@@ -19,14 +19,14 @@ import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import dev.pawin.tour_pro.common.enumeration.TourCompanyStatus;
-import dev.pawin.tour_pro.common.exception.EntityNotFound;
+import dev.pawin.tour_pro.common.exception.EntityNotFoundException;
 import dev.pawin.tour_pro.tour_company.dto.RegisterTourCompanyDto;
 import dev.pawin.tour_pro.tour_company.model.TourCompany;
 import dev.pawin.tour_pro.tour_company.model.TourCompanyLogin;
-import dev.pawin.tour_pro.tour_company.model.TourCompanyWallet;
 import dev.pawin.tour_pro.tour_company.repository.TourCompanyLoginRepository;
 import dev.pawin.tour_pro.tour_company.repository.TourCompanyRepository;
-import dev.pawin.tour_pro.tour_company.repository.TourCompanyWalletRepository;
+import dev.pawin.tour_pro.wallet.model.TourCompanyWallet;
+import dev.pawin.tour_pro.wallet.repository.TourCompanyWalletRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class TourCompanyServiceTest {
@@ -95,9 +95,9 @@ public class TourCompanyServiceTest {
 
     @Test
     void whenApproveTourButTourCompanyNotFoundThenError() {
-        when(tourCompanyRepository.findById(anyInt())).thenThrow(new EntityNotFound());
+        when(tourCompanyRepository.findById(anyInt())).thenThrow(new EntityNotFoundException());
 
-        Assertions.assertThrows(EntityNotFound.class, () -> {
+        Assertions.assertThrows(EntityNotFoundException.class, () -> {
             tourCompanyService.approveTourCompany(1);
         });
     }

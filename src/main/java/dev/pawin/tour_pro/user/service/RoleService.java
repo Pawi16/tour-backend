@@ -1,4 +1,4 @@
-package dev.pawin.tour_pro.user;
+package dev.pawin.tour_pro.user.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,6 +7,9 @@ import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import dev.pawin.tour_pro.user.model.Role;
+import dev.pawin.tour_pro.user.repository.RoleRepository;
 
 @Service
 public class RoleService {
